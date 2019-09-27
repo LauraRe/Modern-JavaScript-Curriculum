@@ -75,20 +75,16 @@ class Battle extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleSubmit(id, username) {
-    this.setState(function () {
-      const newState = {};
-      newState[id + 'Name'] = username;
-      newState[id + 'Image'] = `https://github.com/${username}.png?size=200`
-      return newState;
-    });
+    this.setState(() => ({
+      [id + 'Name']: username,
+      [id + 'Image']: `https://github.com/${username}.png?size=200`
+    }))
   }
   handleReset(id) {
-    this.setState(function () {
-      const newState = {};
-      newState[id + 'Name'] = '';
-      newState[id + 'Image'] = null;
-      return newState;
-    })
+    this.setState(() => ({
+      [id + 'Name']: '',
+      [id + 'Image']: null
+    }))
   }
   render() {
     const { match } = this.props
@@ -110,7 +106,7 @@ class Battle extends React.Component {
               username={playerOneName}>
                 <button
                   className='reset'
-                  onClick={this.handleReset.bind(this, 'playerOne')}>
+                  onClick={() => this.handleReset('playerOne')}>
                     Reset
                 </button>
             </PlayerPreview>}
@@ -128,7 +124,7 @@ class Battle extends React.Component {
               username={playerTwoName}>
                 <button
                   className='reset'
-                  onClick={this.handleReset.bind(this, 'playerTwo')}>
+                  onClick={() => this.handleReset('playerTwo')}>
                     Reset
                 </button>
             </PlayerPreview>}
